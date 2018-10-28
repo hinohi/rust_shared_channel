@@ -1,3 +1,42 @@
+//! Multi-producer, multi-consumer FIFO queue communication primitives.
+//!
+//! This module is extension of `std::sync::mpsc`, almost has same API
+//! with it.
+//! Differences are:
+//!
+//! * A struct [`SharedReceiver`] is defined. This is clone-able struct
+//!   (multi-consumer).
+//! * A function [`shared_channel`] corresponding to function `channel`
+//!   is defined. [`shared_channel`] returns a `(Sender, SharedReceiver)`
+//!   tuple instead of `(Sender, Receiver)` tuple.
+//! * Some feature of `std::sync::mpsc` is not implemented yet.
+//!
+//! [`SharedReceiver`]: struct.SharedReceiver.html
+//! [`shared_channel`]: fn.shared_channel.html
+//!
+//! # Example
+//!
+//! Simple usage:
+//!
+//! ```rust
+//! # use std::thread;
+//! # extern crate shared_channel;
+//! # use shared_channel::shared_channel;
+//! # fn main() {
+//! let (tx, rx) = shared_channel();
+//! for i in 0..10 {
+//!     let rx = rx.clone();
+//!     thread::spawn(move || println!("{}", rx.recv().unwrap()));
+//! }
+//!
+//! for i in 0..10 {
+//!     tx.send(i).unwrap();
+//! }
+//! # }
+//! ```
+//!
+//! More examples, see examples directory.
+
 use std::sync::mpsc::{channel, Receiver, RecvError, Sender, TryRecvError};
 use std::sync::{Arc, Mutex, TryLockError};
 
