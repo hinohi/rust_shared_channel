@@ -60,7 +60,7 @@ impl<'a, T> IntoIterator for &'a SharedReceiver<T> {
     }
 }
 
-fn shared_channel<T>() -> (Sender<T>, SharedReceiver<T>) {
+pub fn shared_channel<T>() -> (Sender<T>, SharedReceiver<T>) {
     let (sender, receiver) = channel();
     (sender, SharedReceiver::new(receiver))
 }
@@ -275,7 +275,7 @@ mod tests {
             loop {
                 match rx.try_recv() {
                     Ok(i) => sum += i,
-                    Err(_) => {},
+                    Err(_) => {}
                 };
                 if sum == 55 {
                     break;
