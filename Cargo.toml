@@ -3,4 +3,10 @@ name = "shared_channel"
 version = "0.1.0"
 authors = ["Daiju Nakayama <42.daiju@gmail.com>"]
 
+description = "Multi-producer, multi-consumer FIFO queue communication primitives."
+repository = "https://github.com/hinohi/rust_shared_channel"
+license = "MIT"
+keywords = ["multi-consumer", "channel", "concurrency"]
+categories = ["asynchronous", "concurrency", "rust-patterns"]
+
 [dependencies]
