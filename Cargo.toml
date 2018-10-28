@@ -1,0 +1,6 @@
+[package]
+name = "shared_channel"
+version = "0.1.0"
+authors = ["Daiju Nakayama <42.daiju@gmail.com>"]
+
+[dependencies]
