@@ -9,10 +9,16 @@
 //! * A function [`shared_channel`] corresponding to function `channel`
 //!   is defined. [`shared_channel`] returns a `(Sender, SharedReceiver)`
 //!   tuple instead of `(Sender, Receiver)` tuple.
-//! * Some feature of `std::sync::mpsc` is not implemented yet.
+//!   `Sender` is a struct that defined at `std::sync::mpsc`.
+//! * A function [`shared_sync_channel`] corresponding to function
+//!   `sync_channel` is also defined.
+//! * Some feature of `std::sync::mpsc` is not implemented yet,
+//!   for example `recv_timeout`.
+//!
 //!
 //! [`SharedReceiver`]: struct.SharedReceiver.html
 //! [`shared_channel`]: fn.shared_channel.html
+//! [`shared_sync_channel`]: fn.shared_sync_channel.html
 //!
 //! # Example
 //!
@@ -42,6 +48,12 @@ use std::sync::mpsc::{
 };
 use std::sync::{Arc, Mutex, TryLockError};
 
+/// The clone-able `td::sync::mpsc::Receiver`.
+///
+/// Messages sent to the channel can be retrieved using [`recv`] or [`try_recv`].
+///
+/// [`recv`]: struct.SharedReceiver.html#method.recv
+/// [`try_recv`]: struct.SharedReceiver.html#method.try_recv
 pub struct SharedReceiver<T> {
     inner: Arc<Mutex<Receiver<T>>>,
 }

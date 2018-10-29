@@ -44,4 +44,4 @@ The number shows ID of thread-pool's worker.
     * [ ] `recv_timeout`
     * [x] `iter`
     * [ ] `try_iter`
-* [ ] implement `shared_sync_channel`
+* [x] implement `shared_sync_channel`
